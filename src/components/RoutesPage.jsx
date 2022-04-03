@@ -11,7 +11,7 @@ export const RoutesPage = () => {
             <Route exact path="/search" element={<Results />} />
             <Route exact path="/images" element={<Results />} />
             <Route exact path="/news" element={<Results />} />
-            <Route exact path="/videos"element={<Results />} />
+            <Route exact path="/videos" element={<Results />} />
         </Routes>
     </div>
   )

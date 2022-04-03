@@ -6,7 +6,7 @@ const baseUrl = "https://google-search3.p.rapidapi.com/api/v1";
 export const ResultContextProvider = ({ children }) => {
     const [results, setResults] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
-    const [searchTerm, setSearchTerm] = useState("");
+    const [searchTerm, setSearchTerm] = useState("Elon Musk");
 
     const getResults = async (type) => {
         setIsLoading(true);
@@ -14,17 +14,21 @@ export const ResultContextProvider = ({ children }) => {
         const response = await fetch(`${baseUrl}${type}`, {
             method: 'GET',
             headers: {
-                'x-user-agent': 'desktop',
                 'x-rapidapi-host': 'google-search3.p.rapidapi.com',
-                'x-rapidapi-key': 'KJwZZIJSFimshuivMSVGaiYzkRomp15f2vKjsnK4bKzuUzVLzA'
+                'x-rapidapi-key': 'aeaec0a92amshc9a25dcfe53bde7p1f3021jsn269af41dabcd'
             }
         });
 
-        const data = await response.json();
-
+        const data = await response.json();      
         
-
-        setResults(data);
+        if(type.includes("/news")) {
+            setResults(data.entries)
+        } else if(type.includes("/images")) {
+            setResults(data.image_results)
+        } else {
+            setResults(data.results);
+        }
+        
         setIsLoading(false);
     }
 
